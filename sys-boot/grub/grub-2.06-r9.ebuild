@@ -67,7 +67,7 @@ PATCHES=(
 	"${FILESDIR}"/0063-gfxpayload.patch
 	"${FILESDIR}"/0064-grub-2.02_beta2-KERNEL_GLOBS.patch
 	"${FILESDIR}"/0071-grub-2.06-test-words.patch
-	"${FILESDIR}"/0073-shut-the-fuck-up.patch
+	"${FILESDIR}"/0073-grub-bitch-shut-the-fuck-up.patch
 )
 
 DEJAVU=dejavu-sans-ttf-2.37
