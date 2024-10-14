@@ -1,0 +1,90 @@
+--- b/grub-core/boot/i386/pc/diskboot.S
++++ b/grub-core/boot/i386/pc/diskboot.S
+@@ -50,11 +50,6 @@
+ 	/* save drive reference first thing! */
+ 	pushw	%dx
+ 
+-	/* print a notification message on the screen */
+-	pushw	%si
+-	MSG(notification_string)
+-	popw	%si
+-
+ 	/* this sets up for the first run through "bootloop" */
+ 	movw	$LOCAL(firstlist), %di
+ 
+@@ -279,7 +274,7 @@
+ 	/* restore addressing regs and print a dot with correct DS
+ 	   (MSG modifies SI, which is saved, and unused AX and BX) */
+ 	popw	%ds
+-	MSG(notification_step)
++	/*MSG(notification_step)*/
+ 	popa
+ 
+ 	/* check if finished with this dataset */
+--- a/grub-core/normal/menu.c
++++ b/grub-core/normal/menu.c
+@@ -810,9 +810,6 @@ static void
+ notify_booting (grub_menu_entry_t entry,
+ 		void *userdata __attribute__((unused)))
+ {
+-  grub_printf ("  ");
+-  grub_printf_ (N_("Booting `%s'"), entry->title);
+-  grub_printf ("\n\n");
+ }
+ 
+ /* Callback invoked when a default menu entry executed because of a timeout
+--- a/util/grub.d/10_linux.in
++++ b/util/grub.d/10_linux.in
+@@ -140,7 +140,6 @@ linux_entry ()
+   fi
+   message="$(gettext_printf "Loading Linux %s ..." ${version})"
+   sed "s/^/$submenu_indentation/" << EOF
+-	echo	'$(echo "$message" | grub_quote)'
+ 	linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+ EOF
+   if test -n "${initrd}" ; then
+@@ -151,7 +150,6 @@ EOF
+       initrd_path="${initrd_path} ${rel_dirname}/${i}"
+     done
+     sed "s/^/$submenu_indentation/" << EOF
+-	echo	'$(echo "$message" | grub_quote)'
+ 	initrd	$(echo $initrd_path)
+ EOF
+   fi
+--- a/grub-core/boot/i386/pc/boot.S
++++ b/grub-core/boot/i386/pc/boot.S
+@@ -249,9 +249,6 @@ real_start:
+ 	/* save drive reference first thing! */
+ 	pushw	%dx
+ 
+-	/* print a notification message on the screen */
+-	MSG(notification_string)
+-
+ 	/* set %si to the disk address packet */
+ 	movw	$disk_address_packet, %si
+ 
+--- a/grub-core/kern/main.c
++++ b/grub-core/kern/main.c
+@@ -270,11 +270,6 @@ grub_main (void)
+ 
+   grub_boot_time ("After machine init.");
+ 
+-  /* Hello.  */
+-  grub_setcolorstate (GRUB_TERM_COLOR_HIGHLIGHT);
+-  grub_printf ("Welcome to GRUB!\n\n");
+-  grub_setcolorstate (GRUB_TERM_COLOR_STANDARD);
+-
+   /* Init verifiers API. */
+   grub_verifiers_init ();
+ 
+--- a/po/exclude.pot
++++ b/po/exclude.pot
+@@ -4777,8 +4777,6 @@ msgstr ""
+ 
+ #: grub-core/kern/main.c:261
+ msgid ""
+-"Welcome to GRUB!\n"
+-"\n"
+ msgstr ""
+ 
+ #: grub-core/kern/misc.c:1105
