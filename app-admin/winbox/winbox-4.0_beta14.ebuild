@@ -8,7 +8,7 @@ inherit desktop wrapper
 DESCRIPTION="Standalone client for Mikrotik routers"
 HOMEPAGE="https://mikrotik.com/"
 MY_PN="WinBox"
-SRC_URI="https://download.mikrotik.com/routeros/${PN}/${PV//_}/${MY_PN}_Linux.zip"
+SRC_URI="https://download.mikrotik.com/routeros/${PN}/${PV//_}/${MY_PN}_Linux.zip -> ${P}.zip"
 
 S="${WORKDIR}"
 
