@@ -41,7 +41,7 @@ COMMON_DEPEND="
     dev-libs/libxslt
     >=gnome-base/librsvg-2.57.3:2
     >=media-gfx/mypaint-brushes-2.0.2:=
-    >=media-libs/babl-0.1.112[lcms,vala?]
+    >=media-libs/babl-0.1.112[introspection,lcms,vala?]
     >=media-libs/fontconfig-2.12.6
     >=media-libs/freetype-2.10.2
     >=media-libs/gegl-0.4.58:0.4[cairo,lcms,vala?]
@@ -88,7 +88,7 @@ COMMON_DEPEND="
     xpm? ( x11-libs/libXpm )
 "
 
-RDEPEND+=" x11-themes/hicolor-icon-theme gnome? ( gnome-base/gvfs )"
+RDEPEND+=" ${COMMON_DEPEND} x11-themes/hicolor-icon-theme gnome? ( gnome-base/gvfs )"
 DEPEND+=" test? ( x11-misc/xvfb-run ) vala? ( $(vala_depend) )"
 BDEPEND+="
     >=dev-lang/perl-5.30.3
